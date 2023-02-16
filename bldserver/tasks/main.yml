@@ -1,2 +1,19 @@
 ---
 # tasks file for bldserver
+
+- name: clone from git
+  git:
+    repo: 'https://github.com/cherukuriPraveenchowdary/Sample-Java-War.git'
+    dest: /tmp/java
+    clone: yes
+
+- name: Start a container with a command
+  docker_container:
+    name: mvn
+    image: maven:3.3.9-jdk-8
+    volumes: /tmp/java:/opt/maven
+    working_dir: /opt/maven
+    command: mvn package
+
+- name: Copy java
+  copy: src=/tmp/java dest=./

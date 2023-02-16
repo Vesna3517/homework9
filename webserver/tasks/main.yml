@@ -1,2 +1,13 @@
 ---
 # tasks file for webserver
+
+- name: Ensure container is present
+  docker_container:
+    name: tomcat
+    state: started
+    image: tomcat:9
+    ports: 8080:8080
+    volumes: /usr/local/webapps:/usr/local/tomcat/webapps
+
+- name: copy java
+  copy: src=./ dest=/usr/local/webapps/ 
