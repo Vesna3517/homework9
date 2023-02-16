@@ -5,4 +5,5 @@
   with_items:
        - docker.io
        - python-pip
+- name: install pip
   pip: name=docker-py state=present
